@@ -1,0 +1,38 @@
+<ion-view view-title="Méteoooooooooooooo">
+  <ion-content ng-controller="TutorialsCtrl">
+    <ion-refresher pulling-text="Pull to refresh" on-refresh="doRefresh()">
+    </ion-refresher>
+
+    <img class="full-image" src="img/burgonde.jpg">
+
+    <ion-item class="list card" ng-repeat="tutorial in tutorials">
+
+      <!--<div class="item item-avatar">-->
+        <!--<img src="img/mcfly.jpg">-->
+        <!--<h2>{{tutorial.author.name}}</h2>-->
+        <!--<p>{{tutorial.createdAt | date:'medium'}}</p>-->
+      <!--</div>-->
+
+      <!--<div class="item item-body">-->
+        <!--<img class="full-image" src="img/delorean.jpg">-->
+        <!--<p>-->
+          <!--{{tutorial.desc}}-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--&lt;!&ndash; CONDITION NB COMMENTS s ou pas &ndash;&gt;-->
+          <!--&lt;!&ndash;<div ng-if="video == video.large">-->
+            <!--&lt;!&ndash; code to render a large video block&ndash;&gt;-->
+          <!--</div>-->
+          <!--<div ng-if="video != video.large">-->
+            <!--&lt;!&ndash; code to render the regular video block &ndash;&gt;-->
+          <!--</div>&ndash;&gt;-->
+          <!--<a href="#" class="subdued">1 Like</a>-->
+          <!--<a href="#" class="subdued">5 Commentaires</a>-->
+          <!--<a href="#" class="subdued" ng-click="delete(tutorial._id)">delete tuto</a>-->
+
+        <!--</p>-->
+      <!--</div>-->
+
+    </ion-item>
+  </ion-content>
+</ion-view>

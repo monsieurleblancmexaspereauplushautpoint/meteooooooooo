@@ -1,0 +1,38 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Créer votre propre tutoriel !</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeCreate()">Fermer</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <form ng-submit="doCreate()">
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Titre</span>
+          <input type="text" ng-model="createData.title">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Description</span>
+          <input type="text" ng-model="createData.desc">
+        </label>
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Catégorie
+          </div>
+          <select ng-model="createData.category"  ng-options="c._id as c.name for c in categories"></select>
+        </label>
+        <!--<div text-angular ng-model="htmlVariable"></div>-->
+        <label class="item item-input">
+          <div class="input-label">
+            Contenu
+          </div>
+          <textarea placeholder="Décrivez votre tutoriel" ng-model="createData.text"></textarea>
+        </label>
+        <label class="item">
+          <button class="button button-block button-positive" type="submit">Envoyer</button>
+        </label>
+      </div>
+    </form>
+  </ion-content>
+</ion-modal-view>

@@ -1,0 +1,51 @@
+<ion-modal-view>
+    <ion-header-bar>
+        <h1 class="title">Inscrivez-vous</h1>
+        <div class="buttons">
+            <button class="button button-clear" ng-click="closeSignup()">Fermer</button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <form ng-submit="doSignup()">
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">Nom</span>
+                    <input type="text" ng-model="signupData.name">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Pseudo</span>
+                    <input type="text" ng-model="signupData.username">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">E-mail</span>
+                    <input type="text" ng-model="signupData.email">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Mot de passe</span>
+                    <input type="password" ng-model="signupData.password">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Confirmer le mot de passe</span>
+                    <input type="password" ng-model="signupData.password_confirm">
+                </label>
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        Sex
+                    </div>
+                    <select name="sex" id="sex" ng-model="signupData.sex">
+                        <option value="">-</option>
+                        <option value="1">Homme</option>
+                        <option value="2">Femme</option>
+                    </select>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Date</span>
+                    <input type="date" ng-model="signupData.birthday">
+                </label>
+                <label class="item">
+                    <button class="button button-block button-positive" type="submit">Inscription</button>
+                </label>
+            </div>
+        </form>
+    </ion-content>
+</ion-modal-view>

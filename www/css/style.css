@@ -1,0 +1,50 @@
+/* Empty. Add your own CSS if you like */
+
+.card {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 500px;
+}
+
+
+.back_button {
+  padding: 15px;
+}
+
+.edit_button {
+  display: block;
+  float: right;
+  padding-right: 15px;
+}
+
+.big {
+  font-size: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.info {
+  padding-left: 16px;
+}
+
+.left_info {
+  float: left;
+}
+/*Textangular*/
+/*
+.ta-editor {
+  min-height: 300px;
+  height: auto;
+  overflow: auto;
+  font-family: inherit;
+  font-size: 100%;
+  margin:20px 0;
+}
+*/
+
+.profile{
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 500px;
+}
+

@@ -1,0 +1,51 @@
+<ion-view view-title="Your profile">
+  <ion-content>
+
+    <div class="card" class="col col-100">
+      <div class="big">
+        <span class="ion-chevron-left back_button"></span>
+        <span>{{user.name}}</span>
+        <span class="ion-edit edit_button" ng-click="edit(user.name, 'name', user.id)"></span>
+      </div>
+
+      <div class="item item-avatar">
+        <img src="img/mcfly.jpg">
+      </div>
+
+      <div class="info">
+        <h2>General informations</h2>
+
+          <div class="big">
+            <span class="ion-at back_button"></span>
+            <span>{{user.email}}</span>
+            <span class="ion-edit edit_button" ng-click="edit(user.email, 'email', user.id)"></span>
+          </div>
+
+          <div class="big">
+            <span class="ion-female back_button"></span>
+            <span>{{ getSex() }}</span>
+            <span class="ion-edit edit_button" ng-click="edit(user.sex, 'sex', user.id)"></span>
+          </div>
+
+        <div class="big">
+            <span class="ion-pizza back_button"></span>
+            <span>{{user.birthday | date:'dd/MM/yyyy HH:mm'}}</span>
+          <span class="ion-edit edit_button" ng-click="edit(user.birthday, 'birthday', user.id)"></span>
+        </div>
+
+        <h2>Other informations (readonly)</h2>
+
+        <div class="row">
+          <span class="input-label">Signup date :</span>
+          <span class="input-label">{{user.signupDate | date:'dd/MM/yyyy HH:mm'}}</span>
+        </div>
+        <div class="row">
+          <span class="input-label">Last Operation on : </span>
+          <span class="input-label">{{user.lastOperation | date:'dd/MM/yyyy HH:mm'}}</span>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
+
+
