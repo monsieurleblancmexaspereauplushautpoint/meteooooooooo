@@ -3,9 +3,11 @@
     <ion-refresher pulling-text="Pull to refresh" on-refresh="doRefresh()">
     </ion-refresher>
 
-    <img src="img\mcfly.jpg">
+
 
     <div ng-controller="MainCtrl" class="container">
+      <button ng-click="tamerelachaudiere()" name="tamere" >ta mere</button>
+      <img src="img\mcfly.jpg">
       <h1>Select text file</h1>
       <input type="file" on-read-file="showContent($fileContent)" />
       <div ng-if="content">
