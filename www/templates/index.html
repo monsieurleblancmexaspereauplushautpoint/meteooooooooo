@@ -3,7 +3,16 @@
     <ion-refresher pulling-text="Pull to refresh" on-refresh="doRefresh()">
     </ion-refresher>
 
-    <img class="full-image" src="img/burgonde.jpg">
+    <img class="full-image" src="img\mcfly.jpg">
+
+    <div ng-controller="MainCtrl" class="container">
+      <h1>Select text file</h1>
+      <input type="file" on-read-file="showContent($fileContent)" />
+      <div ng-if="content">
+        <h2>File content is:</h2>
+        <pre>{{ content }}</pre>
+      </div>
+    </div>
 
     <ion-item class="list card" ng-repeat="tutorial in tutorials">
 

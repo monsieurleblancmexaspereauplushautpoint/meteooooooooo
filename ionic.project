@@ -1,4 +1,8 @@
 {
-  "name": "DIjY",
-  "app_id": "02f53159"
+  "name": "myApp",
+  "app_id": "",
+  "watchPatterns": [
+    "www/js/*",
+    "!www/css/**/*"
+  ]
 }
