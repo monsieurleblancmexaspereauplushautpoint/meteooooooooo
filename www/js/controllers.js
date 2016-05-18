@@ -219,7 +219,7 @@ angular.module('starter.controllers', [])
     $scope.field = {};
 
   });
-
+/*
 var myapp = angular.module('myapp', []);
 
 myapp.controller('MainCtrl', function ($scope) {
@@ -248,4 +248,4 @@ myapp.directive('onReadFile', function ($parse) {
             });
         }
     };
-});
+});*/

@@ -82,22 +82,30 @@ angular.module('starter', ['ionic', 'starter.controllers'/*,'textAngular'*/])
         }
     })
 
-  .directive("fileread", [function () {
-    return {
-      scope: {
-        fileread: "="
-      },
-      link: function (scope, element, attributes) {
-        element.bind("change", function (changeEvent) {
-          var reader = new FileReader();
-          reader.onload = function (loadEvent) {
-            scope.$apply(function () {
-              console.log("AAAHAHAHAAHAAAH");
-              scope.fileread = loadEvent.target.result;
-            });
-          }
-          reader.readAsDataURL(changeEvent.target.files[0]);
-        });
-      }
+  .controller('MainCtrl', function ($scope) {
+    $scope.showContent = function($fileContent){
+      $scope.content = $fileContent;
+    };
+  })
+  .directive('onReadFile', function ($parse) {
+  return {
+    restrict: 'A',
+    scope: false,
+    link: function(scope, element, attrs) {
+      var fn = $parse(attrs.onReadFile);
+
+      element.on('change', function(onChangeEvent) {
+        var reader = new FileReader();
+
+        reader.onload = function(onLoadEvent) {
+          scope.$apply(function() {
+            fn(scope, {$fileContent:onLoadEvent.target.result});
+            console.log("AAAAHAHAHAHAHA");
+          });
+        };
+
+        reader.readAsText((onChangeEvent.srcElement || onChangeEvent.target).files[0]);
+      });
     }
-  }]);
+  };
+});
