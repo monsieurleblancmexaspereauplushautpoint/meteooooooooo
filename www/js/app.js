@@ -80,4 +80,24 @@ angular.module('starter', ['ionic', 'starter.controllers'/*,'textAngular'*/])
         } else {
             $urlRouterProvider.otherwise('/app/index');
         }
-    });
+    })
+
+  .directive("fileread", [function () {
+    return {
+      scope: {
+        fileread: "="
+      },
+      link: function (scope, element, attributes) {
+        element.bind("change", function (changeEvent) {
+          var reader = new FileReader();
+          reader.onload = function (loadEvent) {
+            scope.$apply(function () {
+              console.log("AAAHAHAHAAHAAAH");
+              scope.fileread = loadEvent.target.result;
+            });
+          }
+          reader.readAsDataURL(changeEvent.target.files[0]);
+        });
+      }
+    }
+  }]);
