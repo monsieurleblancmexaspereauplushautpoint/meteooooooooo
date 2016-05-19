@@ -11,8 +11,9 @@
       <h1>Select text file</h1>
       <input type="file" on-read-file="showContent($fileContent)" />
       <div ng-if="content">
-        <h2>File content is:</h2>
-        <pre>{{ content }}</pre>
+        <h2>Col names are :</h2>
+        <pre>{{ headers | json}}</pre>
+        <!--<pre>{{ content }}</pre>-->
       </div>
     </div>
     <!--<img class="full-image" src="img/burgonde.jpg">-->

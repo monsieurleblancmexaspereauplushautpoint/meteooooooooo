@@ -92,6 +92,7 @@ angular.module('starter', ['ionic', 'starter.controllers'/*,'textAngular'*/])
 
     //Zone de taff recherche nom colonne par string
 
+
     var count = 0;
     $scope.headers.forEach(function(col){
       count ++;
@@ -151,27 +152,27 @@ angular.module('starter', ['ionic', 'starter.controllers'/*,'textAngular'*/])
         counta ++;
         var line = col.split("\t");
         //temp
-        if(parseFloat(line[33]) < computedData[0][0]){
+        if (parseFloat(line[33]) < computedData[0][0]) {
           console.log("line : " + parseFloat(line[33]) + " < " + computedData[0][0]);
             computedData[0][0] = parseFloat(line[33]);
             computedData[0][2] = line[0] + " " + line[1]; //c'est la date ducon
-        }else if(parseFloat(line[33]) > computedData[0][1]){
+        } else if (parseFloat(line[33]) > computedData[0][1]) {
           computedData[0][1] = parseFloat(line[33]);
           computedData[0][3] = line[0] + " " + line[1];
         }
         //humi
-        if(parseFloat(line[35]) < computedData[1][0]){
+        if (parseFloat(line[35]) < computedData[1][0]) {
           computedData[1][0] = parseFloat(line[35]);
           computedData[1][2] = line[0] + " " + line[1];
-        }else if(parseFloat(line[35]) > computedData[1][1]){
+        } else if (parseFloat(line[35]) > computedData[1][1]) {
           computedData[1][1] = parseFloat(line[35]);
           computedData[1][3] = line[0] + " " + line[1];
         }
 
-        if(parseFloat(line[3]) < computedData[3][0]){
+        if (parseFloat(line[3]) < computedData[3][0]) {
           computedData[3][0] = parseFloat(line[35]);
           computedData[3][2] = line[0] + " " + line[1];
-        }else if(parseFloat(line[3]) > computedData[3][1]){
+        } else if (parseFloat(line[3]) > computedData[3][1]) {
           computedData[1][1] = parseFloat(line[35]);
           computedData[1][3] = line[0] + " " + line[1];
         }
