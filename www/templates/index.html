@@ -10,10 +10,12 @@
       <img src="img\mcfly.jpg">
       <h1>Select text file</h1>
       <input type="file" on-read-file="showContent($fileContent)" />
+      <button ng-click="searchcol()" name="searchcol" >searchcol</button>
       <div ng-if="content">
         <h2>Col names are :</h2>
         <pre>{{ headers | json}}</pre>
         <!--<pre>{{ content }}</pre>-->
+
       </div>
     </div>
     <!--<img class="full-image" src="img/burgonde.jpg">-->

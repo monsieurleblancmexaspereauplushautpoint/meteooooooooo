@@ -92,12 +92,26 @@ angular.module('starter', ['ionic', 'starter.controllers'/*,'textAngular'*/])
 
     //Zone de taff recherche nom colonne par string
 
-
     var count = 0;
     $scope.headers.forEach(function(col){
       count ++;
-      console.log("case " + count + " : " + col );
+        //console.log("case " + count + " : " + col );
     });
+
+      $scope.searchcol = function() {
+        $scope.headers.forEach(function(test){
+          var i = 0;
+          var j = 0;
+          var k = 0;
+          console.log(test);
+        if ("CREATEDATE" == test[j]) {
+          i = count;
+          console.log("--- GOT IT : " + i);
+        }
+        k++;
+        j++;
+      });
+    };
 
     $scope.tamerelachaudiere = function() {
 
