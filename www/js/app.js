@@ -61,7 +61,7 @@ angular.module('starter', ['ionic', 'starter.controllers'/*,'textAngular'*/])
         }
       })
 
-      .state('app.charts', {
+     /* .state('app.charts', {
         url: '/charts',
         views: {
           'menuContent': {
@@ -69,7 +69,7 @@ angular.module('starter', ['ionic', 'starter.controllers'/*,'textAngular'*/])
             controller: 'ProfileCtrl'
           }
         }
-      })
+      })*/
 
       .state('app.index', {
         url: '/index',
@@ -93,32 +93,25 @@ angular.module('starter', ['ionic', 'starter.controllers'/*,'textAngular'*/])
   })
 
   .controller('MainCtrl', function ($scope) {
+
     $scope.showContent = function($fileContent){
       $scope.content = $fileContent;
     };
 
-//    $scope.lines = "ma première line et \n" +
-//      "la seconde";
-//    $scope.lineOne = $scope.lines.split("\n");
-//    console.log(content);
-//    $scope.lineOne.forEach(function(ligne, i, j){
-//      console.log(ligne + i);
-//    });
-//    console.log(lineOne);
+//temp
 
-    /*$scope.header = "CREATEDATE	LOCAL_WINDSPEED_INSTANT	LOCAL_WINDDIR_INSTANT	LOCAL_WS_2MIN_MNM	LOCAL_WS_2MIN_AVG	LOCAL_WS_2MIN_MAX	LOCAL_WS_10MIN_MNM	LOCAL_WS_10MIN_AVG	LOCAL_WS_10MIN_MAX	LOCAL_WD_2MIN_MNM	LOCAL_WD_2MIN_AVG	LOCAL_WD_2MIN_MAX	LOCAL_WD_10MIN_MNM	LOCAL_WD_10MIN_AVG	LOCAL_WD_10MIN_MAX	LOCAL_WIND_GUST	LOCAL_WIND_SQUALL	REMOTE_WINDSPEED_INSTANT	REMOTE_WINDDIR_INSTANT	REMOTE_WIND_2MIN_MNM	REMOTE_WIND_2MIN_AVG	REMOTE_WIND_2MIN_MAX	REMOTE_WIND_10MIN_MNM	REMOTE_WIND_10MIN_AVG	REMOTE_WIND_10MIN_MAX	REMOTE_WD_2MIN_MNM	REMOTE_WD_2MIN_AVG	REMOTE_WD_2MIN_MAX	REMOTE_WD_10MIN_MNM	REMOTE_WD_10MIN_AVG	REMOTE_WD_10MIN_MAX	REMOTE_WIND_GUST	REMOTE_WIND_SQUALL	AIR_TEMPERATURE	DEW_POINT	REL_HUMIDITY	RAIN_1H	RAIN_24H	AIR_PRESSURE	QNH	QFE	QFF	TREND_3H	TENDENCY	PRESSURE_ALT	DENSITY_ALT	PRESENT_WEATHER	RECENT_WEATHER	MOR_1MIN	MOR_10MIN	CLOUD_INSTANT_CL1	CLOUD_INSTANT_CL2	CLOUD_INSTANT_CL3	VERTICAL_VISIBILITY	LIGHTNING_DISTANCE	LIGHTNING_DIRECTION	LIGHTNING_COUNT	LIGHTNING_RF_NOISE	FREEZING_RAIN_ICING_STATUS	FREEZING_RAIN_ICING_MODE	CL1_OCTA1	CL1_BASE1	CL1_OCTA2	CL1_BASE2	CL1_OCTA3	CL1_BASE3	CL1_OCTA4	CL1_BASE4	CL1_OCTA5	CL1_BASE5	WATER_1H	WATER_3H	WATER_6H	WATER_24H	RATE	SNOW_1H	SNOW_3H	SNOW_6H	SNOW_24H";
-    $scope.rawHeaders = $scope.header.split("\t");
 
-    var count = 0;
-    $scope.rawHeaders.forEach(function(col){
-      count ++;
-      //console.log("case " + count + " : " + col );
-    });*/
+
+
+
+
 
     $scope.tab = null;
     $scope.parseOk = false;
+    $scope.hourTab = null;
+    $scope.hourTabToDisplay = null;
 
-    $scope.tamerelachaudiere = function() { //méthode appelée au click du bouton, pour traiter les données du fichier
+    $scope.compute = function() { //méthode appelée au click du bouton, pour traiter les données du fichier
 
       var tab = $scope.content.split('\n');
 
@@ -141,61 +134,45 @@ angular.module('starter', ['ionic', 'starter.controllers'/*,'textAngular'*/])
 
         });
 
-
       //fin zone de taff recherche nom colonne par string
 
-
       var computedData;
+      var hourData = [];
       //initialisation du tab
-      computedData =
-        [
-          [
-            parseFloat(tab[2].split("\t")[tempIndex]),
-            parseFloat(tab[2].split("\t")[tempIndex]),
-            tab[2].split("\t")[dateIndex],
-            tab[2].split("\t")[dateIndex],
-            0,
-            0
-          ],
-          [
-            parseFloat(tab[2].split("\t")[humiIndex]),
-            parseFloat(tab[2].split("\t")[humiIndex]),
-            tab[2].split("\t")[dateIndex],
-            tab[2].split("\t")[dateIndex],
-            0,
-            0
-          ],
-          [
-            parseFloat(tab[2].split("\t")[presIndex]),
-            parseFloat(tab[2].split("\t")[presIndex]),
-            tab[2].split("\t")[dateIndex],
-            tab[2].split("\t")[dateIndex],
-            0,
-            0
-          ],
-          [
-            parseFloat(tab[2].split("\t")[wsIndex]),
-            parseFloat(tab[2].split("\t")[wsIndex]),
-            tab[2].split("\t")[dateIndex],
-            tab[2].split("\t")[dateIndex],
-            0,
-            0
-          ],
-          [
-            parseFloat(tab[2].split("\t")[wdIndex]),
-            parseFloat(tab[2].split("\t")[wdIndex]),
-            tab[2].split("\t")[dateIndex],
-            tab[2].split("\t")[dateIndex],
-            0
-          ]
-        ];
+
+      var computedData = initTab(tab, 2);
+
+      //for(var i = 0 ; i < 24 ; i++){
+        hourData[0] = initTab(tab, 2);
+      //}
+
 
       tab.shift();  //titre qui ne sert à rien
       tab.shift();  //headers
       tab.shift();  //premiere ligne de données avec laquelle on a initialisé notre tableau
 
-      tab.forEach(function(col){
+      var heure = "";
+      //parcours du fichier
+      tab.forEach(function(col, index){
+
         var line = col.split("\t");
+
+        fillTab(line, computedData);
+
+        if(line[dateIndex].split(" ")[1]){
+          if(heure != line[dateIndex].split(" ")[1].split(":")[0]){
+            heure = line[dateIndex].split(" ")[1].split(":")[0];
+            hourData[parseInt(heure)] = initTab(tab, index);
+          }
+
+          fillTab(line, hourData[parseInt(heure)]);
+
+        }
+
+
+        //fillTab(line, );
+
+        /*var line = col.split("\t");
         //temp
         if (parseFloat(line[tempIndex]) < computedData[0][0]) {
           computedData[0][0] = parseFloat(line[tempIndex]);
@@ -251,10 +228,143 @@ angular.module('starter', ['ionic', 'starter.controllers'/*,'textAngular'*/])
         if (line[wsIndex] && line[wsIndex].trim()){
           computedData[3][4] ++;
           computedData[3][5] += parseFloat(line[wsIndex]);
-        }
+        }*/
 
 
       }); // fin forEach
+
+      function initTab(tab, index){
+        return [
+            [
+              parseFloat(tab[index].split("\t")[tempIndex]),
+              parseFloat(tab[index].split("\t")[tempIndex]),
+              tab[index].split("\t")[dateIndex],
+              tab[index].split("\t")[dateIndex],
+              0,
+              0
+            ],
+            [
+              parseFloat(tab[index].split("\t")[humiIndex]),
+              parseFloat(tab[index].split("\t")[humiIndex]),
+              tab[index].split("\t")[dateIndex],
+              tab[index].split("\t")[dateIndex],
+              0,
+              0
+            ],
+            [
+              parseFloat(tab[index].split("\t")[presIndex]),
+              parseFloat(tab[index].split("\t")[presIndex]),
+              tab[index].split("\t")[dateIndex],
+              tab[index].split("\t")[dateIndex],
+              0,
+              0
+            ],
+            [
+              parseFloat(tab[index].split("\t")[wsIndex]),
+              parseFloat(tab[index].split("\t")[wsIndex]),
+              tab[index].split("\t")[dateIndex],
+              tab[index].split("\t")[dateIndex],
+              0,
+              0
+            ],
+            [
+              parseFloat(tab[index].split("\t")[wdIndex]),
+              parseFloat(tab[index].split("\t")[wdIndex]),
+              tab[index].split("\t")[dateIndex],
+              tab[index].split("\t")[dateIndex],
+              0
+            ]
+          ];
+      }
+      function fillTab(line, tab){
+        //temp
+        if (parseFloat(line[tempIndex]) < tab[0][0]) {
+          tab[0][0] = parseFloat(line[tempIndex]);
+          tab[0][2] = line[dateIndex];
+        } else if (parseFloat(line[tempIndex]) > tab[0][1]) {
+          tab[0][1] = parseFloat(line[tempIndex]);
+          tab[0][3] = line[dateIndex];
+        }
+        //humi
+        if (parseFloat(line[humiIndex]) < tab[1][0]) {
+          tab[1][0] = parseFloat(line[humiIndex]);
+          tab[1][2] = line[dateIndex];
+        } else if (parseFloat(line[humiIndex]) > tab[1][1]) {
+          tab[1][1] = parseFloat(line[humiIndex]);
+          tab[1][3] = line[dateIndex];
+        }
+        //pres
+        if (parseFloat(line[presIndex]) < tab[2][0]) {
+          tab[2][0] = parseFloat(line[presIndex]);
+          tab[2][2] = line[dateIndex];
+        } else if (parseFloat(line[presIndex]) > tab[2][1]) {
+          tab[2][1] = parseFloat(line[presIndex]);
+          tab[2][3] = line[dateIndex];
+        }
+
+        //wind speed & direction
+        if (parseFloat(line[wsIndex]) < tab[3][0]) {
+          tab[3][0] = parseFloat(line[wsIndex]);
+          tab[4][0] = parseFloat(line[wdIndex]);
+          tab[3][2] = line[dateIndex];
+        } else if (parseFloat(line[wsIndex]) > tab[3][1]) {
+          tab[3][1] = parseFloat(line[wsIndex]);
+          tab[4][1] = parseFloat(line[wdIndex]);
+          tab[3][3] = line[dateIndex];
+        }
+
+        //count
+        if (line[tempIndex] && line[tempIndex].trim()){
+          tab[0][4] ++;
+          tab[0][5] += parseFloat(line[tempIndex]);
+        }
+
+        if (line[humiIndex] && line[humiIndex].trim()){
+          tab[1][4] ++;
+          tab[1][5] += parseFloat(line[humiIndex]);
+        }
+
+        if (line[presIndex] && line[presIndex].trim()){
+          tab[2][4] ++;
+          tab[2][5] += parseFloat(line[presIndex]);
+        }
+
+        if (line[wsIndex] && line[wsIndex].trim()) {
+          tab[3][4]++;
+          tab[3][5] += parseFloat(line[wsIndex]);
+        }
+      }
+
+      function getMinValues(type){
+        var truc = [];
+
+        for(var i = 0 ; i < 24 ; i++){
+
+          truc.push($scope.hourTab[i][type][0]);
+        }
+        return truc;
+      }
+
+      function getMaxValues(type){
+        var truc = [];
+
+        for(var i = 0 ; i < 24 ; i++){
+
+          truc.push($scope.hourTab[i][type][1]);
+        }
+        return truc;
+      }
+
+      function getAverageValues(type){
+        var truc = [];
+
+        for(var i = 0 ; i < 24 ; i++){
+
+          truc.push($scope.hourTab[i][type][5] / $scope.hourTab[i][type][4]);
+        }
+        return truc;
+      }
+
 
       console.log(computedData[0][0]);  //valeur min
       console.log(computedData[0][1]);  //valeur max
@@ -265,6 +375,28 @@ angular.module('starter', ['ionic', 'starter.controllers'/*,'textAngular'*/])
       console.log("Moyenne temp : " + computedData[0][5] /computedData[0][4]);
       $scope.tab = computedData;
       $scope.parseOk = true;
+      $scope.hourTab = hourData;
+
+      for (var i = 0 ; i < 4 ; i ++){
+        Highcharts.chart('chartContainer' + i, {
+
+          xAxis: {
+            categories: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
+          },
+
+          series: [{
+            name: 'Minimum',
+            data: getMinValues(i)
+          }, {
+            name: 'Maximum',
+            data: getMaxValues(i)
+          }, {
+            name: 'Moyenne',
+            data: getAverageValues(i)
+          }]
+        });
+      }
+
 
     };
 

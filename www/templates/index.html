@@ -2,21 +2,20 @@
   <ion-content ng-controller="TutorialsCtrl">
 
 
+    <div ng-controller="MainCtrl">
 
-    <div ng-controller="MainCtrl" class="container">
-      <button ng-click="tamerelachaudiere()" name="tamere" >ta mere</button>
       <img src="img\burgonde.jpg">
-      <h1>Select text file</h1>
+      <h1>Select file</h1>
       <input type="file" on-read-file="showContent($fileContent)" />
-      <button ng-click="searchcol()" name="searchcol" >searchcol</button>
+      <button ng-click="compute()" name="compute" >compute</button>
      <!-- <div ng-if="content">
         <h2>Col names are :</h2>
         <pre>{{ headers | json}}</pre> -->
         <!--<pre>{{ content }}</pre> </div> -->
 
       <div ng-if="parseOk">
-        <table  >
-            <tr >
+        <table>
+          <tr>
               <th>Analyse</th>
               <th>Min</th>
               <th>Heure du min</th>
@@ -58,27 +57,89 @@
           </tr>
         </table>
 
-        <div id="chartContainer">Placeholder for chart</div>
-        <script src="https://code.highcharts.com/highcharts.js"></script>
-        <script>
-          angular.module('starter', [])
-            .controller('MainCtrl', function ($scope) {
-              Highcharts.chart('chartContainer', {
 
-                xAxis: {
-                  categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-                },
 
-                series: [{
-                  data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
-                }]
-              });
-            });
-        </script>
+
+
+
+
+
+
+<!--
+
+<div ng-repeat="hour in hourTab" >
+
+        <table>
+          <tr>
+            <th>Analyse</th>
+            <th>Min</th>
+            <th>Heure du min</th>
+            <th>Moyenne</th>
+            <th>Max</th>
+            <th>Heure du max</th>
+          </tr>
+          <tr>
+            <th>AIR_TEMPERATURE</th>
+            <td>{{hour[0][0]}}</td>
+            <td>{{hour[0][2]}}</td>
+            <td>{{hour[0][5] / hour[0][4] | number :2}}</td>
+            <td>{{hour[0][1]}}</td>
+            <td>{{hour[0][3]}}</td>
+          </tr>
+          <tr>
+            <th>REL_HUMIDITY</th>
+            <td>{{hour[1][0]}}</td>
+            <td>{{hour[1][2]}}</td>
+            <td>{{hour[1][5] / hour[1][4] | number :2}}</td>
+            <td>{{hour[1][1]}}</td>
+            <td>{{hour[1][3]}}</td>
+          </tr>
+          <tr>
+            <th>AIR_PRESSURE</th>
+            <td>{{hour[2][0]}}</td>
+            <td>{{hour[2][2]}}</td>
+            <td>{{hour[2][5] / hour[2][4] | number :2}}</td>
+            <td>{{hour[2][1]}}</td>
+            <td>{{hour[2][3]}}</td>
+          </tr>
+          <tr>
+            <th>LOCAL_WS_2MIN_MNM</th>
+            <td>{{hour[3][0]}} ({{hour[4][0]}}°)</td>
+            <td>{{hour[3][2]}}</td>
+            <td>{{hour[3][5] / hour[3][4] | number :2}}</td>
+            <td>{{hour[3][1]}} ({{hour[4][1]}}°)</td>
+            <td>{{hour[3][3]}}</td>
+          </tr>
+        </table>
+
+</div>
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
       </div>
+
+      <div id="chartContainer0">Placeholder for chart</div>
+        <div id="chartContainer1">Placeholder for chart</div>
+      <div id="chartContainer2">Placeholder for chart</div>
+      <div id="chartContainer3">Placeholder for chart</div>
+
+
+
 
 
 

@@ -1,0 +1,15 @@
+[1mdiff --git a/www/js/app.js b/www/js/app.js[m
+[1mindex 3af4064..2a4f12d 100644[m
+[1m--- a/www/js/app.js[m
+[1m+++ b/www/js/app.js[m
+[36m@@ -95,7 +95,7 @@[m [mangular.module('starter', ['ionic', 'starter.controllers'/*,'textAngular'*/])[m
+       console.log("case " + count + " : " + col );[m
+     });[m
+ [m
+[31m-    $scope.tamerelachaudiere = function() {[m
+[32m+[m[32m    $scope.tamerelachaudiere = function() {[m[41m [m
+ [m
+       //var minTemp, timeMinTemp, minHumi, timeMinHumi, maxTemp, timeMaxTemp, maxHumi, timeMaxHumi, avgTemp, avgHumi, countTemp, countHumi;[m
+       var tab = $scope.content.split('\n');[m
+warning: LF will be replaced by CRLF in www/js/app.js.
+The file will have its original line endings in your working directory.
