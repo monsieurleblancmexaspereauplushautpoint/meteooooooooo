@@ -61,16 +61,6 @@ angular.module('starter', ['ionic', 'starter.controllers'/*,'textAngular'*/])
         }
       })
 
-     /* .state('app.charts', {
-        url: '/charts',
-        views: {
-          'menuContent': {
-            templateUrl: 'lib/HighCharts-4.2.5/examples/area-basic/index.htm',
-            controller: 'ProfileCtrl'
-          }
-        }
-      })*/
-
       .state('app.index', {
         url: '/index',
         views: {
@@ -86,7 +76,7 @@ angular.module('starter', ['ionic', 'starter.controllers'/*,'textAngular'*/])
       ionic.Platform.isAndroid()
       || ionic.Platform.isIOS()
     ) {
-      $urlRouterProvider.otherwise('/app/mobile_login') ;
+      $urlRouterProvider.otherwise('/app/index') ;
     } else {
       $urlRouterProvider.otherwise('/app/index');
     }
