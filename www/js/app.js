@@ -61,6 +61,16 @@ angular.module('starter', ['ionic', 'starter.controllers'/*,'textAngular'*/])
         }
       })
 
+      .state('app.charts', {
+        url: '/charts',
+        views: {
+          'menuContent': {
+            templateUrl: 'lib/HighCharts-4.2.5/examples/area-basic/index.htm',
+            controller: 'ProfileCtrl'
+          }
+        }
+      })
+
       .state('app.index', {
         url: '/index',
         views: {
@@ -96,14 +106,17 @@ angular.module('starter', ['ionic', 'starter.controllers'/*,'textAngular'*/])
 //    });
 //    console.log(lineOne);
 
-    $scope.header = "CREATEDATE	LOCAL_WINDSPEED_INSTANT	LOCAL_WINDDIR_INSTANT	LOCAL_WS_2MIN_MNM	LOCAL_WS_2MIN_AVG	LOCAL_WS_2MIN_MAX	LOCAL_WS_10MIN_MNM	LOCAL_WS_10MIN_AVG	LOCAL_WS_10MIN_MAX	LOCAL_WD_2MIN_MNM	LOCAL_WD_2MIN_AVG	LOCAL_WD_2MIN_MAX	LOCAL_WD_10MIN_MNM	LOCAL_WD_10MIN_AVG	LOCAL_WD_10MIN_MAX	LOCAL_WIND_GUST	LOCAL_WIND_SQUALL	REMOTE_WINDSPEED_INSTANT	REMOTE_WINDDIR_INSTANT	REMOTE_WIND_2MIN_MNM	REMOTE_WIND_2MIN_AVG	REMOTE_WIND_2MIN_MAX	REMOTE_WIND_10MIN_MNM	REMOTE_WIND_10MIN_AVG	REMOTE_WIND_10MIN_MAX	REMOTE_WD_2MIN_MNM	REMOTE_WD_2MIN_AVG	REMOTE_WD_2MIN_MAX	REMOTE_WD_10MIN_MNM	REMOTE_WD_10MIN_AVG	REMOTE_WD_10MIN_MAX	REMOTE_WIND_GUST	REMOTE_WIND_SQUALL	AIR_TEMPERATURE	DEW_POINT	REL_HUMIDITY	RAIN_1H	RAIN_24H	AIR_PRESSURE	QNH	QFE	QFF	TREND_3H	TENDENCY	PRESSURE_ALT	DENSITY_ALT	PRESENT_WEATHER	RECENT_WEATHER	MOR_1MIN	MOR_10MIN	CLOUD_INSTANT_CL1	CLOUD_INSTANT_CL2	CLOUD_INSTANT_CL3	VERTICAL_VISIBILITY	LIGHTNING_DISTANCE	LIGHTNING_DIRECTION	LIGHTNING_COUNT	LIGHTNING_RF_NOISE	FREEZING_RAIN_ICING_STATUS	FREEZING_RAIN_ICING_MODE	CL1_OCTA1	CL1_BASE1	CL1_OCTA2	CL1_BASE2	CL1_OCTA3	CL1_BASE3	CL1_OCTA4	CL1_BASE4	CL1_OCTA5	CL1_BASE5	WATER_1H	WATER_3H	WATER_6H	WATER_24H	RATE	SNOW_1H	SNOW_3H	SNOW_6H	SNOW_24H";
+    /*$scope.header = "CREATEDATE	LOCAL_WINDSPEED_INSTANT	LOCAL_WINDDIR_INSTANT	LOCAL_WS_2MIN_MNM	LOCAL_WS_2MIN_AVG	LOCAL_WS_2MIN_MAX	LOCAL_WS_10MIN_MNM	LOCAL_WS_10MIN_AVG	LOCAL_WS_10MIN_MAX	LOCAL_WD_2MIN_MNM	LOCAL_WD_2MIN_AVG	LOCAL_WD_2MIN_MAX	LOCAL_WD_10MIN_MNM	LOCAL_WD_10MIN_AVG	LOCAL_WD_10MIN_MAX	LOCAL_WIND_GUST	LOCAL_WIND_SQUALL	REMOTE_WINDSPEED_INSTANT	REMOTE_WINDDIR_INSTANT	REMOTE_WIND_2MIN_MNM	REMOTE_WIND_2MIN_AVG	REMOTE_WIND_2MIN_MAX	REMOTE_WIND_10MIN_MNM	REMOTE_WIND_10MIN_AVG	REMOTE_WIND_10MIN_MAX	REMOTE_WD_2MIN_MNM	REMOTE_WD_2MIN_AVG	REMOTE_WD_2MIN_MAX	REMOTE_WD_10MIN_MNM	REMOTE_WD_10MIN_AVG	REMOTE_WD_10MIN_MAX	REMOTE_WIND_GUST	REMOTE_WIND_SQUALL	AIR_TEMPERATURE	DEW_POINT	REL_HUMIDITY	RAIN_1H	RAIN_24H	AIR_PRESSURE	QNH	QFE	QFF	TREND_3H	TENDENCY	PRESSURE_ALT	DENSITY_ALT	PRESENT_WEATHER	RECENT_WEATHER	MOR_1MIN	MOR_10MIN	CLOUD_INSTANT_CL1	CLOUD_INSTANT_CL2	CLOUD_INSTANT_CL3	VERTICAL_VISIBILITY	LIGHTNING_DISTANCE	LIGHTNING_DIRECTION	LIGHTNING_COUNT	LIGHTNING_RF_NOISE	FREEZING_RAIN_ICING_STATUS	FREEZING_RAIN_ICING_MODE	CL1_OCTA1	CL1_BASE1	CL1_OCTA2	CL1_BASE2	CL1_OCTA3	CL1_BASE3	CL1_OCTA4	CL1_BASE4	CL1_OCTA5	CL1_BASE5	WATER_1H	WATER_3H	WATER_6H	WATER_24H	RATE	SNOW_1H	SNOW_3H	SNOW_6H	SNOW_24H";
     $scope.rawHeaders = $scope.header.split("\t");
 
     var count = 0;
     $scope.rawHeaders.forEach(function(col){
       count ++;
       //console.log("case " + count + " : " + col );
-    });
+    });*/
+
+    $scope.tab = null;
+    $scope.parseOk = false;
 
     $scope.tamerelachaudiere = function() { //méthode appelée au click du bouton, pour traiter les données du fichier
 
@@ -225,30 +238,34 @@ angular.module('starter', ['ionic', 'starter.controllers'/*,'textAngular'*/])
           computedData[0][5] += parseFloat(line[tempIndex]);
         }
 
-        if (line[humiIndex]){
+        if (line[humiIndex] && line[humiIndex].trim()){
           computedData[1][4] ++;
           computedData[1][5] += parseFloat(line[humiIndex]);
         }
 
-        if (line[presIndex]){
+        if (line[presIndex] && line[presIndex].trim()){
           computedData[2][4] ++;
           computedData[2][5] += parseFloat(line[presIndex]);
         }
 
-        if (line[wsIndex]){
+        if (line[wsIndex] && line[wsIndex].trim()){
           computedData[3][4] ++;
           computedData[3][5] += parseFloat(line[wsIndex]);
         }
 
 
-      });
+      }); // fin forEach
+
       console.log(computedData[0][0]);  //valeur min
       console.log(computedData[0][1]);  //valeur max
       console.log(computedData[0][2]);  //date de la valeur min
       console.log(computedData[0][3]);  //date de la valeur max
       console.log(computedData[0][4]);  //nombre de données enregistées
       console.log(computedData[0][5]);  //somme de ces données (calculée pour la moyenne)
-      console.log("Moyenne temp : " + computedData[0][5] /computedData[0][4])
+      console.log("Moyenne temp : " + computedData[0][5] /computedData[0][4]);
+      $scope.tab = computedData;
+      $scope.parseOk = true;
+
     };
 
 

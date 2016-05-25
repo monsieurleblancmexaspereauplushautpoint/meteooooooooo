@@ -1,27 +1,96 @@
 <ion-view view-title="Méteoooooooooooooo">
   <ion-content ng-controller="TutorialsCtrl">
-    <ion-refresher pulling-text="Pull to refresh" on-refresh="doRefresh()">
-    </ion-refresher>
 
 
 
     <div ng-controller="MainCtrl" class="container">
       <button ng-click="tamerelachaudiere()" name="tamere" >ta mere</button>
-      <img src="img\mcfly.jpg">
+      <img src="img\burgonde.jpg">
       <h1>Select text file</h1>
       <input type="file" on-read-file="showContent($fileContent)" />
       <button ng-click="searchcol()" name="searchcol" >searchcol</button>
-      <div ng-if="content">
+     <!-- <div ng-if="content">
         <h2>Col names are :</h2>
-        <pre>{{ headers | json}}</pre>
-        <!--<pre>{{ content }}</pre>-->
+        <pre>{{ headers | json}}</pre> -->
+        <!--<pre>{{ content }}</pre> </div> -->
+
+      <div ng-if="parseOk">
+        <table  >
+            <tr >
+              <th>Analyse</th>
+              <th>Min</th>
+              <th>Heure du min</th>
+              <th>Moyenne</th>
+              <th>Max</th>
+              <th>Heure du max</th>
+            </tr>
+          <tr>
+            <th>AIR_TEMPERATURE</th>
+            <td>{{tab[0][0]}}</td>
+            <td>{{tab[0][2]}}</td>
+            <td>{{tab[0][5] / tab[0][4] | number :2}}</td>
+            <td>{{tab[0][1]}}</td>
+            <td>{{tab[0][3]}}</td>
+          </tr>
+          <tr>
+            <th>REL_HUMIDITY</th>
+            <td>{{tab[1][0]}}</td>
+            <td>{{tab[1][2]}}</td>
+            <td>{{tab[1][5] / tab[1][4] | number :2}}</td>
+            <td>{{tab[1][1]}}</td>
+            <td>{{tab[1][3]}}</td>
+          </tr>
+          <tr>
+            <th>AIR_PRESSURE</th>
+            <td>{{tab[2][0]}}</td>
+            <td>{{tab[2][2]}}</td>
+            <td>{{tab[2][5] / tab[2][4] | number :2}}</td>
+            <td>{{tab[2][1]}}</td>
+            <td>{{tab[2][3]}}</td>
+          </tr>
+          <tr>
+            <th>LOCAL_WS_2MIN_MNM</th>
+            <td>{{tab[3][0]}} ({{tab[4][0]}}°)</td>
+            <td>{{tab[3][2]}}</td>
+            <td>{{tab[3][5] / tab[3][4] | number :2}}</td>
+            <td>{{tab[3][1]}} ({{tab[4][1]}}°)</td>
+            <td>{{tab[3][3]}}</td>
+          </tr>
+        </table>
+
+        <div id="chartContainer">Placeholder for chart</div>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script>
+          angular.module('starter', [])
+            .controller('MainCtrl', function ($scope) {
+              Highcharts.chart('chartContainer', {
+
+                xAxis: {
+                  categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                },
+
+                series: [{
+                  data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+                }]
+              });
+            });
+        </script>
+
 
       </div>
+
+
+
+
     </div>
+
+
+
     <!--<img class="full-image" src="img/burgonde.jpg">-->
 
 
-    <ion-item class="list card" ng-repeat="tutorial in tutorials">
+   <!-- <ion-item class="list card" ng-repeat="tutorial in tutorials"> -->
 
       <!--<div class="item item-avatar">-->
         <!--<img src="img/mcfly.jpg">-->
